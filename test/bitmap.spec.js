@@ -57,4 +57,36 @@ describe('bitmap', function() {
 
     });
     
+    describe('difference between 2 bitmaps, so we can only render changed rows', function() {
+        
+        it ('returns nothing if there is no difference', function() {
+            var bmp = bitmap.fromStrings([
+                '1       ',
+                ' 1      ',
+                '  1     ',
+            ]);
+            var difference = bitmap.difference(bmp, bmp);
+            difference.should.have.length(0);
+        });
+
+        it ('returns changed rows in the second bitmap', function() {
+            var bmp1 = bitmap.fromStrings([
+                '1       ',
+                ' 1      ',
+                '  1     ',
+            ]);
+            var bmp2 = bitmap.fromStrings([
+                '1       ',
+                '        ',
+                '    1   ',
+            ]);
+            var difference = bitmap.difference(bmp1, bmp2);
+            difference.should.eql([
+                { row: 2, bitmask: 0 },
+                { row: 3, bitmask: 8 },
+            ]);
+        });
+        
+    });
+    
 });
