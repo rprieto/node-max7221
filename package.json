@@ -1,0 +1,19 @@
+{
+  "name": "node-max7221",
+  "version": "0.0.0",
+  "description": "Node.js GPIO abstraction for the MAX7221 driver chip (LED matrix), for use on a Raspberry PI",
+  "keywords": [
+    "node",
+    "gpio",
+    "led",
+    "matrix",
+    "max7221",
+    "max7219",
+    "raspberry",
+    "pi",
+    "raspi"
+  ],
+  "author": "Romain Prieto <romain@asyncdev.net> (http://www.asyncdev.net/)",
+  "license": "BSD",
+  "main": "max7221.js"
+}
