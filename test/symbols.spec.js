@@ -11,4 +11,14 @@ describe('symbols', function() {
         });
     });
 
+    it ('has letters from M-T (for a start)', function() {
+        var start = 'm'.charCodeAt(0);
+        var finish = 't'.charCodeAt(0);
+        for (var i = start; i <= finish; ++i) {
+            var bmp = symbols[String.fromCharCode(i)];
+            should.exist(bmp);
+            bmp.should.have.length(8);
+        }
+    });
+
 });
