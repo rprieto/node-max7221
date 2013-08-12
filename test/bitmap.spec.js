@@ -4,6 +4,12 @@ var bitmap = require('../lib/bitmap');
 
 describe('bitmap', function() {
     
+    it ('can returns an empty bitmap: all rows/columns off', function() {
+        var bmp = bitmap.empty();
+        _.pluck(bmp, 'row').should.eql([1, 2, 3, 4, 5, 6, 7, 8])
+        _.pluck(bmp, 'bitmask').should.eql([0, 0, 0, 0, 0, 0, 0, 0]);
+    });
+    
     describe('from a matrix (useful when handling ndarrays)', function() {
 
         it ('calculates the bitmask for each row', function() {
