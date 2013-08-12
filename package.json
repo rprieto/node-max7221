@@ -15,5 +15,15 @@
   ],
   "author": "Romain Prieto <romain@asyncdev.net> (http://www.asyncdev.net/)",
   "license": "BSD",
-  "main": "max7221.js"
+  "main": "max7221.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "underscore": "~1.5.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.12.0",
+    "should": "~1.2.2"
+  }
 }
