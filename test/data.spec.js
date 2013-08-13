@@ -1,37 +1,53 @@
 var _       = require('underscore');
 var should  = require('should');
 var shapes  = require('../lib/data/shapes');
-var letters = require('../lib/data/letters');
-var digits  = require('../lib/data/digits');
+var ascii   = require('../lib/data/ascii');
 
 describe('data', function() {
     
-    it ('can load all predefined collections', function() {
-        var collections = [shapes, letters, digits];
-        collections.forEach(function(collection) {
-            Object.keys(collection).length.should.be.above(1);
-            _.each(collection, function(bitmap) {
+    describe('symbols', function() {
+        
+        it('can load the entire collection', function() {
+            Object.keys(shapes).length.should.be.above(1);
+            _.each(shapes, function(bitmap) {
                 bitmap.should.have.length(8);
             });
         });
-    });
-
-    it ('has letters from M-T (for a start)', function() {
-        var start = 'i'.charCodeAt(0);
-        var finish = 't'.charCodeAt(0);
-        for (var i = start; i <= finish; ++i) {
-            var bmp = letters[String.fromCharCode(i)];
-            should.exist(bmp);
-            bmp.should.have.length(8);
-        }
+    
     });
     
-    it ('has digits from 0-3 (for a start)', function() {
-        for (var i = 0; i <= 3; ++i) {
-            var bmp = digits[i];
-            should.exist(bmp);
-            bmp.should.have.length(8);
-        }
+    describe('ascii', function() {
+        
+        it('can load the entire collection', function() {
+            Object.keys(ascii).length.should.be.above(1);
+            _.each(ascii, function(bitmap) {
+                bitmap.should.have.length(8);
+            });
+        });
+        
+        it('has well formed letters', function() {
+            _.pluck(ascii['a'], 'bitmask').should.eql([60,126,102,102,126,126,102,102]);
+            _.pluck(ascii['i'], 'bitmask').should.eql([24,24,24,24,24,24,24,24]);
+        });
+        
+        it('has letters from a-z', function() {
+            var start  = 'a'.charCodeAt(0);
+            var finish = 'z'.charCodeAt(0);
+            for (var i = start; i <= finish; ++i) {
+                var bmp = ascii[String.fromCharCode(i)];
+                should.exist(bmp);
+                bmp.should.have.length(8);
+            }
+        });
+        
+        it('has digits from 0-9', function() {
+            for (var i = 0; i <= 9; ++i) {
+                var bmp = ascii[i.toString()];
+                should.exist(bmp);
+                bmp.should.have.length(8);
+            }
+        });
+        
     });
 
 });
