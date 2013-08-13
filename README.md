@@ -5,74 +5,76 @@
 
 What does it look like?
 
-    var max7221 = require('node-max7221');
+```javascript
+var max7221 = require('node-max7221');
+
+// which GPIO pins are wired to the MAX7221 driver (see diagram in /docs folder)
+max7221.configure({ dataIn: 25, load: 8, clock: 7 });
+
+max7221.open(function() {
+
+    // write a single bitmap
+    max7221.write( /* bitmap */ );
     
-    // which GPIO pins are wired to the MAX7221 driver (see diagram in /docs folder)
-    max7221.configure({ dataIn: 25, load: 8, clock: 7 });
+    // start a sequence or some scrolling text
+    max7221.sequence( /* list of bitmaps */ , /* speed */ );
+    max7221.scroll( /* list of bitmaps */ , /* speed */ );
     
-    max7221.open(function() {
-    
-        // write a single bitmap
-        max7221.write( /* bitmap */ );
-        
-        // start a sequence or some scrolling text
-        max7221.sequence( /* list of bitmaps */ , /* speed */ );
-        max7221.scroll( /* list of bitmaps */ , /* speed */ );
-        
-        // stop a running sequence/scroll
-        max7221.stop();
-    
-    });
-    
-    process.on('SIGTERM', max7221.close);
+    // stop a running sequence/scroll
+    max7221.stop();
+
+});
+
+process.on('SIGTERM', max7221.close);
+```
 
 Bitmaps can be defined or loaded easily:
 
-    
-    // predefined letters numbers & symbols
-    max7221.ascii['a']
-    max7221.ascii['3']
-    max7221.ascii['.']
-    
-    // syntactic sugar for ascii sequences
-    max7221.text('hello world!')
-    
-    // make an 8x8 bitmap from arrays (ex: ndarray)
-    max7221.matrix([
-        [1,0,1,0,1,0,1,0],
-        [0,1,0,1,0,1,0,1],
-        [1,0,1,0,1,0,1,0],
-        [0,1,0,1,0,1,0,1],
-        [1,0,1,0,1,0,1,0],
-        [0,1,0,1,0,1,0,1],
-        [1,0,1,0,1,0,1,0],
-        [0,1,0,1,0,1,0,1]
-    ]);
-    
-    // make an 8x8 bitmap from strings (easy to read in code)
-    max7221.matrix([
-        '  1111  ',
-        ' 111111 ',
-        '111  111',
-        '11    11',
-        '11    11',
-        '111  111',
-        ' 111111 ',
-        '  1111  ',
-    ]);
-    
-    // load a whole array of bitmaps at once
-    max7221.matrices([
-        '  1111  ',  '   11   ',  '11111111',
-        ' 111111 ',  '   11   ',  ' 111111 ',
-        '111  111',  '   11   ',  '  1111  ',
-        '11    11',  '11111111',  '   11   ',
-        '11    11',  '11111111',  '   11   ',
-        '111  111',  '   11   ',  '  1111  ',
-        ' 111111 ',  '   11   ',  ' 111111 ',
-        '  1111  ',  '   11   ',  '11111111',
-    ]);
-    
+```javascript
+// predefined letters numbers & symbols
+max7221.ascii['a']
+max7221.ascii['3']
+max7221.ascii['.']
+
+// syntactic sugar for ascii sequences
+max7221.text('hello world!')
+
+// make an 8x8 bitmap from arrays (ex: ndarray)
+max7221.matrix([
+    [1,0,1,0,1,0,1,0],
+    [0,1,0,1,0,1,0,1],
+    [1,0,1,0,1,0,1,0],
+    [0,1,0,1,0,1,0,1],
+    [1,0,1,0,1,0,1,0],
+    [0,1,0,1,0,1,0,1],
+    [1,0,1,0,1,0,1,0],
+    [0,1,0,1,0,1,0,1]
+]);
+
+// make an 8x8 bitmap from strings (easy to read in code)
+max7221.matrix([
+    '  1111  ',
+    ' 111111 ',
+    '111  111',
+    '11    11',
+    '11    11',
+    '111  111',
+    ' 111111 ',
+    '  1111  ',
+]);
+
+// load a whole array of bitmaps at once
+max7221.matrices([
+    '  1111  ',  '   11   ',  '11111111',
+    ' 111111 ',  '   11   ',  ' 111111 ',
+    '111  111',  '   11   ',  '  1111  ',
+    '11    11',  '11111111',  '   11   ',
+    '11    11',  '11111111',  '   11   ',
+    '111  111',  '   11   ',  '  1111  ',
+    ' 111111 ',  '   11   ',  ' 111111 ',
+    '  1111  ',  '   11   ',  '11111111',
+]);
+```
 
 ## Requirements
 
