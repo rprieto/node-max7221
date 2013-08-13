@@ -5,6 +5,7 @@
   "keywords": [
     "node",
     "gpio",
+    "spi",
     "led",
     "matrix",
     "max7221",
