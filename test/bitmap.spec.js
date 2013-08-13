@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _      = require('underscore');
 var should = require('should');
 var bitmap = require('../lib/bitmap');
 
