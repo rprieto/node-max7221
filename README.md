@@ -14,11 +14,11 @@ max7221.configure({ dataIn: 25, load: 8, clock: 7 });
 max7221.open(function() {
 
     // write a single bitmap
-    max7221.write( /* bitmap */ );
+    max7221.write(bitmap);
     
     // start a sequence or some scrolling text
-    max7221.sequence( /* list of bitmaps */ , /* speed */ );
-    max7221.scroll( /* list of bitmaps */ , /* speed */ );
+    max7221.sequence([bitmap, bitmap, bitmap], 500);
+    max7221.scroll([bitmap, bitmap, bitmap], 500);
     
     // stop a running sequence/scroll
     max7221.stop();
@@ -36,7 +36,7 @@ max7221.ascii['a']
 max7221.ascii['3']
 max7221.ascii['.']
 
-// syntactic sugar for ascii sequences
+// syntactic sugar for a list of ascii characters
 max7221.text('hello world!')
 
 // make an 8x8 bitmap from arrays (ex: ndarray)
