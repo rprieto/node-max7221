@@ -76,7 +76,7 @@ Bitmaps can be defined or loaded easily:
 
 ## Requirements
 
-![requirements](http://github.com/rprieto/node-max7221/docs/requirements.png)
+![requirements](https://raw.github.com/rprieto/node-max7221/master/docs/requirements.jpg)
 
 You will also need components for the wiring (breadboards, jumper wires, a 30K resistor, small capacitors).
 
