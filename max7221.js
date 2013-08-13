@@ -1,7 +1,7 @@
 var driver      = require('./lib/driver');
 var spi         = require('./lib/spi');
 var bitmap      = require('./lib/bitmap');
-var ascii       = require('./lib/data/ascii');
+var ascii       = require('./lib/ascii');
 
 //
 // GPIO configuration
@@ -34,7 +34,7 @@ exports.matrices = bitmap.matrices;
 
 exports.text = function(str) {
     return str.split().map(function(letter) {
-        return max7221.ascii[letter];
+        return ascii[letter];
     });
 }
 
