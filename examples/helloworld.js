@@ -7,7 +7,7 @@ max7221.configure({
 });
 
 max7221.open(function() {
-    max7221.scroll(max7221.text('hello world!'));
+    max7221.scroll(max7221.text('hello world!'), 800);
 });
 
 process.on('SIGTERM', function() {
