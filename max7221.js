@@ -28,13 +28,7 @@ exports.stop     = driver.stop;
 // bitmaps
 //
 
-exports.ascii    = ascii;
+exports.ascii    = ascii.symbols;
+exports.text     = ascii.text;
 exports.matrix   = bitmap.matrix;
 exports.matrices = bitmap.matrices;
-
-exports.text = function(str) {
-    return str.split().map(function(letter) {
-        return ascii[letter];
-    });
-}
-
