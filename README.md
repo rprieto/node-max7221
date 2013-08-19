@@ -3,12 +3,28 @@
 > Node.js GPIO abstraction for the MAX7221 driver chip (LED matrix),  for use on a Raspberry PI.
 > Built by Brad Ward, James Ottaway, and Romain Prieto at CampJS 2013
 
-What does it look like?
+## Requirements
 
-```javascript
+* Raspberry PI
+* LED Matrix
+* MAX7221 display driver chip (http://www.maximintegrated.com/datasheet/index.mvp/id/1339)
+* Wiring components (breadboard, jumper wires, resistors, capacitors)
+
+Or a pre-made [LED matrix kit](http://littlebirdelectronics.com/products/led-matrix-kit):
+![kit photo](https://raw.github.com/rprieto/node-max7221/master/docs/led-matrix-kit.jpg)
+
+On the Raspberry PI:
+
+- Install Node.js
+- Install [GPIO admin](https://github.com/quick2wire/quick2wire-gpio-admin) so you don't need to run Node as root
+
+## Show me the code
+
+```js
 var max7221 = require('node-max7221');
 
 // which GPIO pins are wired to the MAX7221 driver (see diagram in /docs folder)
+// can be any valid GPIO pins
 max7221.configure({ dataIn: 25, load: 8, clock: 7 });
 
 max7221.open(function() {
@@ -28,9 +44,9 @@ max7221.open(function() {
 process.on('SIGTERM', max7221.close);
 ```
 
-Bitmaps can be defined or loaded easily:
+Bitmaps can be loaded or defined easily:
 
-```javascript
+```js
 // predefined letters numbers & symbols
 max7221.ascii['a']
 max7221.ascii['3']
@@ -76,18 +92,9 @@ max7221.matrices([
 ]);
 ```
 
-## Requirements
-
-![requirements](https://raw.github.com/rprieto/node-max7221/master/docs/requirements.jpg)
-
-You will also need components for the wiring (breadboards, jumper wires, a 30K resistor, small capacitors).
-
-On the Raspberry PI:
-
-- Install Node.js
-- Install [GPIO admin](https://github.com/quick2wire/quick2wire-gpio-admin) so you don't need to run Node as root
-
 ## Running the samples
+
+On your Raspberry PI:
 
 ```
 git clone git@github.com:rprieto/node-max7221.git
