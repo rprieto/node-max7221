@@ -45,4 +45,55 @@ describe('animation', function() {
         
     });
 
+    describe('scrolling bitmaps', function() {
+        
+        it('scroll all 8 columns at the given speed', function() {
+            var list = ascii.text('abc');
+            animation.scroll(list, 800);
+            driver.write.callCount.should.eql(0);
+            clock.tick(800);
+            driver.write.callCount.should.eql(8);
+        });
+
+        it('writes the first bitmap on tick 1', function() {
+            var list = ascii.text('abc');
+            animation.scroll(list, 800);
+            clock.tick(100);
+            driver.write.lastCall.args[0].should.eql(ascii.symbols['a']);
+        });
+
+        it('writes the second bitmap on tick 8', function() {
+            var list = ascii.text('abc');
+            animation.scroll(list, 800);
+            clock.tick(100 + 800);
+            driver.write.lastCall.args[0].should.eql(ascii.symbols['b']);
+        });
+
+        it('writes a scrolled frame in between', function() {
+            var list = bitmap.matrices([
+                '        ',  '11111111',
+                '11111111',  '        ',
+                '        ',  '11111111',
+                '11111111',  '        ',
+                '        ',  '11111111',
+                '11111111',  '        ',
+                '        ',  '11111111',
+                '11111111',  '        ',
+            ]);
+            animation.scroll(list, 800);
+            clock.tick(100 + 400);
+            driver.write.lastCall.args[0].should.eql(bitmap.matrix([
+                '    1111',
+                '1111    ',
+                '    1111',
+                '1111    ',
+                '    1111',
+                '1111    ',
+                '    1111',
+                '1111    ',
+            ]));
+        });
+        
+    });
+
 });
