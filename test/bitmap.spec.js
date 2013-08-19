@@ -6,8 +6,7 @@ describe('bitmap', function() {
     
     it('can returns an empty bitmap: all rows/columns off', function() {
         var bmp = bitmap.empty();
-        _.pluck(bmp, 'row').should.eql([1, 2, 3, 4, 5, 6, 7, 8])
-        _.pluck(bmp, 'bitmask').should.eql([0, 0, 0, 0, 0, 0, 0, 0]);
+        bmp.should.eql([0, 0, 0, 0, 0, 0, 0, 0]);
     });
     
     describe('user matrix', function() {
@@ -23,8 +22,7 @@ describe('bitmap', function() {
                 [0,0,0,0,0,0,1,0],
                 [0,0,0,0,0,0,0,1],
             ]);
-            _.pluck(bmp, 'row').should.eql([1, 2, 3, 4, 5, 6, 7, 8])
-            _.pluck(bmp, 'bitmask').should.eql([128, 64, 32, 16, 8, 4, 2, 1]);
+            bmp.should.eql([128, 64, 32, 16, 8, 4, 2, 1]);
         });
 
         it('can have several bits turned on', function() {
@@ -38,8 +36,7 @@ describe('bitmap', function() {
                 [1,1,1,1,1,1,1,0],
                 [1,1,1,1,1,1,1,1],
             ]);
-            _.pluck(bmp, 'row').should.eql([1, 2, 3, 4, 5, 6, 7, 8])
-            _.pluck(bmp, 'bitmask').should.eql([128, 192, 224, 240, 248, 252, 254, 255]);
+            bmp.should.eql([128, 192, 224, 240, 248, 252, 254, 255]);
         });
 
         it('can also specify rows as strings', function() {
@@ -53,8 +50,7 @@ describe('bitmap', function() {
                 '      1 ',
                 '       1'
             ]);
-            _.pluck(bmp, 'row').should.eql([1, 2, 3, 4, 5, 6, 7, 8])
-            _.pluck(bmp, 'bitmask').should.eql([128, 64, 32, 16, 8, 4, 2, 1]);
+            bmp.should.eql([128, 64, 32, 16, 8, 4, 2, 1]);
         });
     
         it('can load multiple matrices at once (vertically sliced)', function() {
@@ -69,9 +65,9 @@ describe('bitmap', function() {
                 '        ',  '        ',  '11111111',
             ]);
             bitmaps.should.have.length(3);
-            _.pluck(bitmaps[0], 'bitmask').should.eql([  0,   0,   0,   0,   0,   0,   0,   0]);
-            _.pluck(bitmaps[1], 'bitmask').should.eql([255,   0, 255,   0, 255,   0, 255,   0]);
-            _.pluck(bitmaps[2], 'bitmask').should.eql([255, 255, 255, 255, 255, 255, 255, 255]);
+            bitmaps[0].should.eql([  0,   0,   0,   0,   0,   0,   0,   0]);
+            bitmaps[1].should.eql([255,   0, 255,   0, 255,   0, 255,   0]);
+            bitmaps[2].should.eql([255, 255, 255, 255, 255, 255, 255, 255]);
         });
 
     });
@@ -85,7 +81,7 @@ describe('bitmap', function() {
                 '  1     ',
             ]);
             var difference = bitmap.difference(bmp, bmp);
-            difference.should.have.length(0);
+            difference.should.eql([null, null, null]);
         });
 
         it('returns changed rows in the second bitmap', function() {
@@ -100,10 +96,7 @@ describe('bitmap', function() {
                 '    1   ',
             ]);
             var difference = bitmap.difference(bmp1, bmp2);
-            difference.should.eql([
-                { row: 2, bitmask: 0 },
-                { row: 3, bitmask: 8 },
-            ]);
+            difference.should.eql([null, 0, 8]);
         });
         
     });

@@ -12,8 +12,8 @@ describe('ascii', function() {
     });
 
     it('has well formed letters', function() {
-        _.pluck(ascii.symbols['a'], 'bitmask').should.eql([60,126,102,102,126,126,102,102]);
-        _.pluck(ascii.symbols['i'], 'bitmask').should.eql([24,24,24,24,24,24,24,24]);
+        ascii.symbols['a'].should.eql([60,126,102,102,126,126,102,102]);
+        ascii.symbols['i'].should.eql([24,24,24,24,24,24,24,24]);
     });
 
     it('has letters from a-z', function() {
