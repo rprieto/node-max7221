@@ -2,7 +2,7 @@ var driver      = require('./lib/driver');
 var spi         = require('./lib/spi');
 var bitmap      = require('./lib/bitmap');
 var ascii       = require('./lib/ascii');
-var animation   = require('./animation');
+var animation   = require('./lib/animation');
 
 //
 // GPIO configuration
