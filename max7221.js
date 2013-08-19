@@ -2,6 +2,7 @@ var driver      = require('./lib/driver');
 var spi         = require('./lib/spi');
 var bitmap      = require('./lib/bitmap');
 var ascii       = require('./lib/ascii');
+var animation   = require('./animation');
 
 //
 // GPIO configuration
@@ -20,9 +21,14 @@ exports.configure = function(pins) {
 exports.open     = driver.open;
 exports.close    = driver.close;
 exports.write    = driver.write;
-exports.sequence = driver.sequence;
-exports.scroll   = driver.scroll;
-exports.stop     = driver.stop;
+
+//
+// animations
+//
+
+exports.sequence = animation.sequence;
+exports.scroll   = animation.scroll;
+exports.stop     = animation.stop;
 
 //
 // bitmaps
