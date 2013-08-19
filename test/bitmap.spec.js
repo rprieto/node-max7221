@@ -108,4 +108,78 @@ describe('bitmap', function() {
         
     });
     
+    describe('shifting', function() {
+        
+        it('can shift a row left and right', function() {
+            bitmap.shiftRow(bin('11111111'),  0).should.eql(bin('11111111'));
+            bitmap.shiftRow(bin('11111111'),  1).should.eql(bin('01111111'));
+            bitmap.shiftRow(bin('11111111'),  7).should.eql(bin('00000001'));
+            bitmap.shiftRow(bin('11111111'), -1).should.eql(bin('11111110'));
+            bitmap.shiftRow(bin('11111111'), -7).should.eql(bin('10000000'));
+        });
+
+        it('can shift an entire bitmap right', function() {
+            var bmps = bitmap.matrices([
+                '1       ', ' 1      ', '  1     ', '   1    ', '    1   ', '     1  ', '      1 ', '       1',
+                ' 1      ', '  1     ', '   1    ', '    1   ', '     1  ', '      1 ', '       1', '        ',
+                '  1     ', '   1    ', '    1   ', '     1  ', '      1 ', '       1', '        ', '        ',
+                '   1    ', '    1   ', '     1  ', '      1 ', '       1', '        ', '        ', '        ',
+                '    1   ', '     1  ', '      1 ', '       1', '        ', '        ', '        ', '        ',
+                '     1  ', '      1 ', '       1', '        ', '        ', '        ', '        ', '        ',
+                '      1 ', '       1', '        ', '        ', '        ', '        ', '        ', '        ',
+                '       1', '        ', '        ', '        ', '        ', '        ', '        ', '        ',
+            ]);
+            bitmap.shift(bmps[0], 1).should.eql(bmps[1]);
+            bitmap.shift(bmps[0], 2).should.eql(bmps[2]);
+            bitmap.shift(bmps[0], 3).should.eql(bmps[3]);
+            bitmap.shift(bmps[0], 4).should.eql(bmps[4]);
+            bitmap.shift(bmps[0], 5).should.eql(bmps[5]);
+            bitmap.shift(bmps[0], 6).should.eql(bmps[6]);
+            bitmap.shift(bmps[0], 7).should.eql(bmps[7]);
+        });
+
+        it('can shift an entire bitmap left', function() {
+            var bmps = bitmap.matrices([
+                '1       ', '        ', '        ', '        ', '        ', '        ', '        ', '        ',
+                ' 1      ', '1       ', '        ', '        ', '        ', '        ', '        ', '        ',
+                '  1     ', ' 1      ', '1       ', '        ', '        ', '        ', '        ', '        ',
+                '   1    ', '  1     ', ' 1      ', '1       ', '        ', '        ', '        ', '        ',
+                '    1   ', '   1    ', '  1     ', ' 1      ', '1       ', '        ', '        ', '        ',
+                '     1  ', '    1   ', '   1    ', '  1     ', ' 1      ', '1       ', '        ', '        ',
+                '      1 ', '     1  ', '    1   ', '   1    ', '  1     ', ' 1      ', '1       ', '        ',
+                '       1', '      1 ', '     1  ', '    1   ', '   1    ', '  1     ', ' 1      ', '1       ',
+            ]);
+            bitmap.shift(bmps[0], -1).should.eql(bmps[1]);
+            bitmap.shift(bmps[0], -2).should.eql(bmps[2]);
+            bitmap.shift(bmps[0], -3).should.eql(bmps[3]);
+            bitmap.shift(bmps[0], -4).should.eql(bmps[4]);
+            bitmap.shift(bmps[0], -5).should.eql(bmps[5]);
+            bitmap.shift(bmps[0], -6).should.eql(bmps[6]);
+            bitmap.shift(bmps[0], -7).should.eql(bmps[7]);
+        });
+        
+    });
+
+    describe('unions', function() {
+        
+        it('can give the union of 2 bitmaps', function() {
+            var bmps = bitmap.matrices([
+                '11      ', '    11  ', '11  11  ',
+                '11      ', '    11  ', '11  11  ',
+                '11      ', '    11  ', '11  11  ',
+                '11      ', '    11  ', '11  11  ',
+                '11      ', '    11  ', '11  11  ',
+                '11      ', '    11  ', '11  11  ',
+                '11      ', '    11  ', '11  11  ',
+                '11      ', '    11  ', '11  11  ',
+            ]);
+            bitmap.union(bmps[0], bmps[1]).should.eql(bmps[2]);
+        });
+        
+    });
+
+    function bin(str) {
+        return parseInt(str, 2);
+    }
+    
 });
